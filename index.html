@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Together Friends</title>
+    <meta name="description" content="Jogo 2D cooperativo multiplayer independente inspirado em Together Friends. Resolva quebra-cabeças cooperativos, ative placas de pressão, salte obstáculos e alcance o portal juntos!" />
+    <meta property="og:title" content="Together Friends" />
+    <meta property="og:description" content="Jogo 2D cooperativo multiplayer independente inspirado em Together Friends. Resolva quebra-cabeças cooperativos, ative placas de pressão, salte obstáculos e alcance o portal juntos!" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Together Friends" />
+    <meta name="twitter:description" content="Jogo 2D cooperativo multiplayer independente inspirado em Together Friends. Resolva quebra-cabeças cooperativos, ative placas de pressão, salte obstáculos e alcance o portal juntos!" />
+    <meta name="twitter:image" content="/og-image.jpg" />
+    <meta name="theme-color" content="#38bdf8" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Together Friends" />
+    <link rel="apple-touch-icon" href="/app-icon.jpg" />
+    <link rel="icon" type="image/jpeg" href="/app-icon.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <script>
+      // Filter Vite HMR WebSocket errors (HMR is disabled in AI Studio dev environment per instructions)
+      (() => {
+        const isWsHmrError = (val) => {
+          if (!val) return false;
+          const str = String(val?.message || val?.stack || val || '');
+          return str.includes('WebSocket closed without opened') ||
+                 str.includes('failed to connect to websocket') ||
+                 str.includes('WebSocket closed') ||
+                 (str.includes('[vite]') && (str.includes('WebSocket') || str.includes('connection')));
+        };
+
+        const origError = console.error;
+        console.error = function (...args) {
+          const hasWsError = args.some(arg => isWsHmrError(arg));
+          if (hasWsError) {
+            return;
+          }
+          origError.apply(console, args);
+        };
+
+        window.addEventListener('error', (event) => {
+          if (isWsHmrError(event.message) || isWsHmrError(event.error)) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return true;
+          }
+        }, true);
+
+        window.addEventListener('unhandledrejection', (event) => {
+          if (isWsHmrError(event.reason)) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+          }
+        }, true);
+
+        // Early capture of beforeinstallprompt for instant installation
+        window.addEventListener('beforeinstallprompt', (e) => {
+          e.preventDefault();
+          window.__pwaInstallPrompt = e;
+        });
+      })();
+    </script>
+  </head>
+  <body class="bg-sky-100 text-slate-800 select-none min-h-screen">
+    <div id="root" class="min-h-screen w-full flex flex-col"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

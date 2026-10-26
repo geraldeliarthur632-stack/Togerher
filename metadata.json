@@ -1,0 +1,8 @@
+{
+  "name": "Together Friends",
+  "description": "Jogo 2D cooperativo multiplayer independente inspirado em Together Friends. Resolva quebra-cabeças cooperativos, ative placas de pressão, salte obstáculos e alcance o portal juntos!",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile, game statistics, customization and saved stage progress",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string", "maxLength": 30 },
+        "email": { "type": "string", "maxLength": 100 },
+        "stagesCompleted": { "type": "number" },
+        "unlockedLevels": { "type": "number" },
+        "coins": { "type": "number" },
+        "unlockedSkins": { "type": "array" },
+        "friendCode": { "type": "string", "maxLength": 16 },
+        "friends": { "type": "array" },
+        "totalJumps": { "type": "number" },
+        "highFives": { "type": "number" },
+        "customization": { "type": "object" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["displayName", "stagesCompleted", "totalJumps"]
+    },
+    "GameRoom": {
+      "title": "GameRoom",
+      "description": "Multiplayer game room session data",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string", "maxLength": 6 },
+        "hostId": { "type": "string", "maxLength": 128 },
+        "stageIndex": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["code", "hostId", "stageIndex"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles and progress"
+    },
+    "/rooms/{roomId}": {
+      "schema": "GameRoom",
+      "description": "Active game room state"
+    }
+  }
+}
